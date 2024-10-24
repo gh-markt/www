@@ -2,37 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Administrator</title>
-    <!-- Include reCAPTCHA v3 -->
-    <script src="https://www.google.com/recaptcha/api.js?render=6LdoT2sqAAAAAH5ecco_Z99P71aYesHeyCI_P-iL"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        form {
-            max-width: 500px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        label {
-            font-weight: bold;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            text-align: center;
+            margin-top: 100px;
         }
         button {
-            padding: 10px 20px;
+            padding: 15px 30px;
+            font-size: 16px;
             background-color: #28a745;
             color: white;
             border: none;
@@ -42,59 +22,17 @@
         button:hover {
             background-color: #218838;
         }
-        .error {
-            color: red;
-            font-size: 0.9em;
-        }
-        .success {
-            color: green;
-            font-size: 1.2em;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
 
 <h2>Contact Administrator</h2>
-<p>Please fill in the form below to send an email to the site administrator.</p>
+<p>Click the button below to send an email to the administrator.</p>
 
-<!-- Form container to replace with a success or error message -->
-<div id="formContainer">
-    <form id="contactForm" onsubmit="return validateForm()" action="mailto:mark@nerdflat.com?subject=Administrator%20contact" method="POST" enctype="text/plain">
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="8" placeholder="Enter your message here" required></textarea>
-
-        <div id="captchaError" class="error"></div>
-
-        <button type="submit">Submit</button>
-    </form>
-</div>
-
-<script>
-    // Use reCAPTCHA v3 and simulate success/failure behavior
-    function validateForm() {
-        let captchaError = document.getElementById('captchaError');
-        let formContainer = document.getElementById('formContainer');
-
-        // Clear previous errors
-        captchaError.textContent = '';
-
-        // Execute reCAPTCHA v3 to get a token
-        grecaptcha.ready(function() {
-            grecaptcha.execute('6LdoT2sqAAAAAH5ecco_Z99P71aYesHeyCI_P-iL', {action: 'submit'}).then(function(token) {
-                // Simulate a success scenario after CAPTCHA is validated
-                captchaError.textContent = '';  // Clear any errors
-                formContainer.innerHTML = '<p class="success">Message sent successfully!</p>';
-            }).catch(function(error) {
-                // If CAPTCHA fails, show an error message
-                captchaError.textContent = 'CAPTCHA verification failed. Please try again.';
-            });
-        });
-
-        // Prevent form from submitting while waiting for reCAPTCHA validation
-        return false;
-    }
-</script>
+<!-- Simple mailto link with only the recipient -->
+<a href="mailto:mark@nerdflat.com">
+    <button>Send Email to Administrator</button>
+</a>
 
 </body>
 </html>
