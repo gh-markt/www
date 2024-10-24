@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Administrator</title>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- Include reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdoT2sqAAAAAH5ecco_Z99P71aYesHeyCI_P-iL"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -56,29 +57,28 @@
     <label for="message">Message:</label>
     <textarea id="message" name="message" rows="8" placeholder="Enter your message here" required></textarea>
 
-    <!-- reCAPTCHA widget -->
-    <div class="g-recaptcha" data-sitekey="6LdoT2sqAAAAAH5ecco_Z99P71aYesHeyCI_P-iL"></div>
     <div id="captchaError" class="error"></div>
 
     <button type="submit">Submit</button>
 </form>
 
 <script>
+    // Use reCAPTCHA v3
     function validateForm() {
         let captchaError = document.getElementById('captchaError');
-        let recaptchaResponse = grecaptcha.getResponse();
 
-        // Clear previous errors
-        captchaError.textContent = '';
+        // Execute reCAPTCHA v3 to get a token
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6LdoT2sqAAAAAH5ecco_Z99P71aYesHeyCI_P-iL', {action: 'submit'}).then(function(token) {
+                // Add token to form (hidden input, if you were using server-side verification)
+                // For a static site, we can't validate the token server-side.
+                
+                captchaError.textContent = '';  // Clear any previous errors
+                return true;  // Allow form submission
+            });
+        });
 
-        // Validate reCAPTCHA
-        if (recaptchaResponse.length === 0) {
-            captchaError.textContent = 'Please verify that you are not a robot.';
-            return false;
-        }
-
-        // If everything is valid, allow the form to be submitted
-        return true;
+        return false;  // Prevent form submission while waiting for token
     }
 </script>
 
