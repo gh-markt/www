@@ -1,3 +1,86 @@
-<html><body>
-mark@nerdflat.com
-</body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Administrator</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Contact Administrator</h2>
+<p>Please fill in the form below to send an email to the site administrator.</p>
+
+<form id="contactForm" onsubmit="return validateForm()" action="mailto:mark@nerdflat.com" method="POST" enctype="text/plain">
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" rows="8" placeholder="Enter your message here" required></textarea>
+
+    <!-- reCAPTCHA widget -->
+    <div class="g-recaptcha" data-sitekey="6LdoT2sqAAAAAH5ecco_Z99P71aYesHeyCI_P-iL"></div>
+    <div id="captchaError" class="error"></div>
+
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    function validateForm() {
+        let captchaError = document.getElementById('captchaError');
+        let recaptchaResponse = grecaptcha.getResponse();
+
+        // Clear previous errors
+        captchaError.textContent = '';
+
+        // Validate reCAPTCHA
+        if (recaptchaResponse.length === 0) {
+            captchaError.textContent = 'Please verify that you are not a robot.';
+            return false;
+        }
+
+        // If everything is valid, allow the form to be submitted
+        return true;
+    }
+</script>
+
+</body>
+</html>
