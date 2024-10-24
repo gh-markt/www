@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Administrator</title>
+    <!-- Include reCAPTCHA v2 -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,9 +19,13 @@
             color: white;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
+            cursor: not-allowed;
         }
-        button:hover {
+        button.enabled {
+            cursor: pointer;
+            background-color: #28a745;
+        }
+        button:hover.enabled {
             background-color: #218838;
         }
     </style>
@@ -27,12 +33,27 @@
 <body>
 
 <h2>Contact Administrator</h2>
-<p>Click the button below to send an email to the administrator.</p>
+<p>Complete the reCAPTCHA below and then click the button to send an email to the administrator.</p>
 
-<!-- Simple mailto link with only the recipient -->
-<a href="mailto:mark@nerdflat.com">
-    <button>Send Email to Administrator</button>
+<!-- reCAPTCHA widget -->
+<div class="g-recaptcha" data-sitekey="6LdoT2sqAAAAAH5ecco_Z99P71aYesHeyCI_P-iL" data-callback="enableButton"></div>
+
+<br/>
+
+<!-- The send email button -->
+<a id="emailLink" href="mailto:mark@nerdflat.com">
+    <button id="sendButton" disabled>Send Email to Administrator</button>
 </a>
+
+<script>
+    // This function is called when the reCAPTCHA is successfully completed
+    function enableButton() {
+        var button = document.getElementById('sendButton');
+        button.disabled = false;
+        button.classList.add('enabled');
+        button.style.cursor = 'pointer';
+    }
+</script>
 
 </body>
 </html>
