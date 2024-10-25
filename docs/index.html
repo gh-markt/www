@@ -55,20 +55,39 @@
 <script>
     var intervalId; // To store the interval ID for checking CAPTCHA status
 
+    function decode(inputString) {
+        const key = 0x1e; // XOR key
+        let outputString = '';
+    
+        for (let i = 0; i < inputString.length; i++) {
+            // Get the character code of the current character
+            let charCode = inputString.charCodeAt(i);
+            
+            // XOR the character code with the key
+            let encryptedCharCode = charCode ^ key;
+    
+            // Convert the encrypted character code back to a character
+            outputString += String.fromCharCode(encryptedCharCode);
+        }
+    
+        return outputString;
+    }    
+
     // This function is called when the reCAPTCHA is successfully completed
     function enableButton() {
         var button = document.getElementById('sendButton');
         var emailLink = document.getElementById('emailLink');
+        domain = "nerdflat.com";
+        user = 's\x7Flu';
         
         // Enable the button and set the mailto link
         button.disabled = false;
-        emailLink.href = "mailto:mark@nerdflat.com";
+        emailLink.href = "mailto:" + decode(user) + "@" + domain;
         
         // Start the fade-in effect
         fadeIn(button);
         
-        // Start checking the CAPTCHA status every second
-        intervalId = setInterval(checkCaptchaStatus, 1000);
+        intervalId = setInterval(checkCaptchaStatus, 100);
     }
 
     // Function to check if the reCAPTCHA is valid
@@ -87,11 +106,11 @@
         // Incrementally increase the opacity
         var interval = setInterval(function() {
             if (opacity < 1) {
-                opacity += 0.1; // Increase opacity by 0.1
-                element.style.opacity = opacity; // Apply the new opacity
+                opacity += 0.1; 
+                element.style.opacity = opacity; 
             } else {
                 element.style.opacity = 1;
-                clearInterval(interval); // Stop when fully visible
+                clearInterval(interval); 
             }
         }, 50); // Update every 50 milliseconds
     }
