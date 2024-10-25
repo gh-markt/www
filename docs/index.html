@@ -90,6 +90,7 @@
                 opacity += 0.1; // Increase opacity by 0.1
                 element.style.opacity = opacity; // Apply the new opacity
             } else {
+                element.style.opacity = 1;
                 clearInterval(interval); // Stop when fully visible
             }
         }, 50); // Update every 50 milliseconds
