@@ -42,7 +42,7 @@
 
 <!-- Container for centering the CAPTCHA -->
 <div class="captcha-container">
-    <div class="g-recaptcha" data-sitekey="6LeTYGsqAAAAAO1tPIt8Cst3xt0-iPpP2L57TWM4" data-callback="enableButton" data-expired="disableButton"></div>
+    <div class="g-recaptcha" data-sitekey="6LeTYGsqAAAAAO1tPIt8Cst3xt0-iPpP2L57TWM4" data-callback="enableButton"></div>
 </div>
 
 <br/>
@@ -53,51 +53,30 @@
 </a>
 
 <script>
-    // Function to decode the obfuscated email username
-    function decode(inputString) {
-        const key = 0x1e; // XOR key
-        let outputString = '';
-
-        for (let i = 0; i < inputString.length; i++) {
-            // Get the character code of the current character
-            let charCode = inputString.charCodeAt(i);
-            
-            // XOR the character code with the key
-            let encryptedCharCode = charCode ^ key;
-
-            // Convert the encrypted character code back to a character
-            outputString += String.fromCharCode(encryptedCharCode);
-        }
-
-        return outputString;
-    }
+    var intervalId; // To store the interval ID for checking CAPTCHA status
 
     // This function is called when the reCAPTCHA is successfully completed
     function enableButton() {
         var button = document.getElementById('sendButton');
         var emailLink = document.getElementById('emailLink');
-        var domain = "nerdflat.com";
-        var user = 's\x7Flu'; // Obfuscated username
+        
+        // Enable the button and set the mailto link
+        button.disabled = false;
+        emailLink.href = "mailto:mark@nerdflat.com";
         
         // Start the fade-in effect
         fadeIn(button);
         
-        // Enable the button and set the mailto link
-        button.disabled = false;
-        emailLink.href = "mailto:" + decode(user) + "@" + domain;
-        
-        // Update the cursor to pointer
-        button.classList.add('enabled'); // Add enabled class
+        // Start checking the CAPTCHA status every second
+        intervalId = setInterval(checkCaptchaStatus, 1000);
     }
 
-    // Function to hide and disable the button if CAPTCHA is invalidated
-    function disableButton() {
-        var button = document.getElementById('sendButton');
-        var emailLink = document.getElementById('emailLink');
-
-        button.disabled = true; // Disable the button
-        button.style.opacity = 0; // Hide the button
-        emailLink.href = "#"; // Remove the mailto link
+    // Function to check if the reCAPTCHA is valid
+    function checkCaptchaStatus() {
+        // If the reCAPTCHA response is invalid
+        if (grecaptcha.getResponse().length === 0) {
+            hideButton();
+        }
     }
 
     // Function to fade in the button
@@ -114,6 +93,20 @@
                 clearInterval(interval); // Stop when fully visible
             }
         }, 50); // Update every 50 milliseconds
+        element.style.opacity = 1;
+    }
+
+    // Function to hide the button
+    function hideButton() {
+        var button = document.getElementById('sendButton');
+        var emailLink = document.getElementById('emailLink');
+
+        // Reset the button and hide it
+        button.style.display = 'none'; // Hide the button
+        emailLink.href = "#"; // Reset href to "#"
+
+        // Clear the interval to stop checking
+        clearInterval(intervalId);
     }
 </script>
 
