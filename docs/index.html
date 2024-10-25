@@ -26,7 +26,6 @@
             border-radius: 5px;
             cursor: not-allowed;
             opacity: 0; /* Initially hidden */
-            transition: opacity 0.3s ease; /* Smooth transition for fade in */
         }
         button.enabled {
             cursor: pointer;
@@ -90,7 +89,6 @@
         button.classList.add('enabled'); // Add enabled class
         emailLink.href = "mailto:" + decode(user) + "@" + domain;
         
-        // Start checking the CAPTCHA status every second
         intervalId = setInterval(checkCaptchaStatus, 100);
     }
 
