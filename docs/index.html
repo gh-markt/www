@@ -59,12 +59,12 @@
         var button = document.getElementById('sendButton');
         var emailLink = document.getElementById('emailLink');
         
+        // Start the fade-in effect
+        fadeIn(button);
+        
         // Enable the button and set the mailto link
         button.disabled = false;
         emailLink.href = "mailto:mark@nerdflat.com";
-        
-        // Start the fade-in effect
-        fadeIn(button);
         
         // Update the cursor to pointer
         button.classList.add('enabled'); // Add enabled class
