@@ -12,6 +12,11 @@
             text-align: center;
             margin-top: 100px;
         }
+        .captcha-container {
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            margin-bottom: 20px; /* Space below the CAPTCHA */
+        }
         button {
             padding: 15px 30px;
             font-size: 16px;
@@ -20,11 +25,10 @@
             border: none;
             border-radius: 5px;
             cursor: not-allowed;
-            display: none; /* Hide the button initially */
+            opacity: 0; /* Initially hidden */
         }
         button.enabled {
             cursor: pointer;
-            display: inline-block; /* Show the button when enabled */
         }
         button:hover.enabled {
             background-color: #218838;
@@ -36,8 +40,10 @@
 <h2>Contact Administrator</h2>
 <p>Complete the reCAPTCHA below to reveal the administrator's email.</p>
 
-<!-- reCAPTCHA widget -->
-<div class="g-recaptcha" data-sitekey="6LeTYGsqAAAAAO1tPIt8Cst3xt0-iPpP2L57TWM4" data-callback="enableButton"></div>
+<!-- Container for centering the CAPTCHA -->
+<div class="captcha-container">
+    <div class="g-recaptcha" data-sitekey="6LeTYGsqAAAAAO1tPIt8Cst3xt0-iPpP2L57TWM4" data-callback="enableButton"></div>
+</div>
 
 <br/>
 
@@ -52,13 +58,28 @@
         var button = document.getElementById('sendButton');
         var emailLink = document.getElementById('emailLink');
         
-        // Enable the button and reveal it
+        // Enable the button and set the mailto link
         button.disabled = false;
-        button.classList.add('enabled');
-        button.style.cursor = 'pointer';
-        
-        // Update the mailto link with the administrator's email
         emailLink.href = "mailto:mark@nerdflat.com";
+        
+        // Start the fade-in effect
+        fadeIn(button);
+    }
+
+    // Function to fade in the button
+    function fadeIn(element) {
+        var opacity = 0; // Initial opacity
+        element.style.display = 'inline-block'; // Ensure the element is displayed
+
+        // Incrementally increase the opacity
+        var interval = setInterval(function() {
+            if (opacity < 1) {
+                opacity += 0.1; // Increase opacity by 0.1
+                element.style.opacity = opacity; // Apply the new opacity
+            } else {
+                clearInterval(interval); // Stop when fully visible
+            }
+        }, 50); // Update every 50 milliseconds
     }
 </script>
 
