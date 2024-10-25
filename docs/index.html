@@ -24,14 +24,15 @@
             color: white;
             border: none;
             border-radius: 5px;
-            cursor: not-allowed;
+            cursor: not-allowed; /* Initially disabled cursor */
             opacity: 0; /* Initially hidden */
+            transition: opacity 0.5s ease; /* Optional: add smooth transition */
         }
         button.enabled {
-            cursor: pointer;
+            cursor: pointer; /* Change cursor when enabled */
         }
         button:hover.enabled {
-            background-color: #218838;
+            background-color: #218838; /* Darker green on hover */
         }
     </style>
 </head>
@@ -64,6 +65,9 @@
         
         // Start the fade-in effect
         fadeIn(button);
+        
+        // Update the cursor to pointer
+        button.classList.add('enabled'); // Add enabled class
     }
 
     // Function to fade in the button
