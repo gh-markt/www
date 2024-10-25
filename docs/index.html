@@ -104,6 +104,7 @@
     function fadeIn(element) {
         var opacity = 0; // Initial opacity
         element.style.display = 'inline-block'; // Ensure the element is displayed
+        element.style.opacity = opacity; // Apply the new opacity
 
         // Incrementally increase the opacity
         var interval = setInterval(function() {
