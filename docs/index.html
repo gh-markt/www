@@ -24,15 +24,14 @@
             color: white;
             border: none;
             border-radius: 5px;
-            cursor: not-allowed; /* Initially disabled cursor */
+            cursor: not-allowed;
             opacity: 0; /* Initially hidden */
-            transition: opacity 0.5s ease; /* Optional: add smooth transition */
         }
         button.enabled {
-            cursor: pointer; /* Change cursor when enabled */
+            cursor: pointer;
         }
         button:hover.enabled {
-            background-color: #218838; /* Darker green on hover */
+            background-color: #218838;
         }
     </style>
 </head>
@@ -43,7 +42,7 @@
 
 <!-- Container for centering the CAPTCHA -->
 <div class="captcha-container">
-    <div class="g-recaptcha" data-sitekey="6LeTYGsqAAAAAO1tPIt8Cst3xt0-iPpP2L57TWM4" data-callback="enableButton"></div>
+    <div class="g-recaptcha" data-sitekey="6LeTYGsqAAAAAO1tPIt8Cst3xt0-iPpP2L57TWM4" data-callback="enableButton" data-expired="disableButton"></div>
 </div>
 
 <br/>
@@ -54,12 +53,31 @@
 </a>
 
 <script>
+    // Function to decode the obfuscated email username
+    function decode(inputString) {
+        const key = 0x1e; // XOR key
+        let outputString = '';
+
+        for (let i = 0; i < inputString.length; i++) {
+            // Get the character code of the current character
+            let charCode = inputString.charCodeAt(i);
+            
+            // XOR the character code with the key
+            let encryptedCharCode = charCode ^ key;
+
+            // Convert the encrypted character code back to a character
+            outputString += String.fromCharCode(encryptedCharCode);
+        }
+
+        return outputString;
+    }
+
     // This function is called when the reCAPTCHA is successfully completed
     function enableButton() {
         var button = document.getElementById('sendButton');
         var emailLink = document.getElementById('emailLink');
         var domain = "nerdflat.com";
-        var user = 's\x7Flu';
+        var user = 's\x7Flu'; // Obfuscated username
         
         // Start the fade-in effect
         fadeIn(button);
@@ -70,6 +88,16 @@
         
         // Update the cursor to pointer
         button.classList.add('enabled'); // Add enabled class
+    }
+
+    // Function to hide and disable the button if CAPTCHA is invalidated
+    function disableButton() {
+        var button = document.getElementById('sendButton');
+        var emailLink = document.getElementById('emailLink');
+
+        button.disabled = true; // Disable the button
+        button.style.opacity = 0; // Hide the button
+        emailLink.href = "#"; // Remove the mailto link
     }
 
     // Function to fade in the button
@@ -87,24 +115,6 @@
             }
         }, 50); // Update every 50 milliseconds
     }
-
-function decode(inputString) {
-    const key = 0x1e; // XOR key
-    let outputString = '';
-
-    for (let i = 0; i < inputString.length; i++) {
-        // Get the character code of the current character
-        let charCode = inputString.charCodeAt(i);
-        
-        // XOR the character code with the key
-        let encryptedCharCode = charCode ^ key;
-
-        // Convert the encrypted character code back to a character
-        outputString += String.fromCharCode(encryptedCharCode);
-    }
-
-    return outputString;
-}    
 </script>
 
 </body>
