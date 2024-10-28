@@ -85,8 +85,8 @@
         // Start the fade-in effect
         fadeIn(button);
 
-        // Start checking the CAPTCHA status every second
-        intervalId = setInterval(checkCaptchaStatus, 1000);
+        // Start checking the CAPTCHA status every 100 milliseconds
+        intervalId = setInterval(checkCaptchaStatus, 100);
     }
 
     // Function to check if the reCAPTCHA is valid
