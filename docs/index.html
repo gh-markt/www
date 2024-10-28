@@ -14,8 +14,8 @@
         }
         .captcha-container {
             display: flex;
-            justify-content: center; /* Center horizontally */
-            margin-bottom: 20px; /* Space below the CAPTCHA */
+            justify-content: center;
+            margin-bottom: 20px;
         }
         button {
             padding: 15px 30px;
@@ -26,6 +26,7 @@
             border-radius: 5px;
             cursor: not-allowed;
             opacity: 0; /* Initially hidden */
+            transition: opacity 0.3s ease;
         }
         button.enabled {
             cursor: pointer;
@@ -38,22 +39,20 @@
 <body>
 
 <h2>Contact Administrator</h2>
-<p>Complete the reCAPTCHA below to send the administrator an email.</p>
+<p>Complete the reCAPTCHA below to reveal the administrator's email.</p>
 
-<!-- Container for centering the CAPTCHA -->
 <div class="captcha-container">
     <div class="g-recaptcha" data-sitekey="6LeTYGsqAAAAAO1tPIt8Cst3xt0-iPpP2L57TWM4" data-callback="enableButton"></div>
 </div>
 
 <br/>
 
-<!-- The send email button is hidden initially -->
 <a id="emailLink" href="#">
-    <button id="sendButton" disabled>Send Email to Administrator (mark@nerdflat.com)</button>
+    <button id="sendButton" disabled>Send Email to Administrator</button>
 </a>
 
 <script>
-    var intervalId; // To store the interval ID for checking CAPTCHA status
+    var intervalId;
 
     // XOR decode function
     function decode(inputString) {
@@ -61,13 +60,8 @@
         let outputString = '';
 
         for (let i = 0; i < inputString.length; i++) {
-            // Get the character code of the current character
             let charCode = inputString.charCodeAt(i);
-            
-            // XOR the character code with the key
             let encryptedCharCode = charCode ^ key;
-
-            // Convert the encrypted character code back to a character
             outputString += String.fromCharCode(encryptedCharCode);
         }
 
@@ -79,22 +73,26 @@
         var button = document.getElementById('sendButton');
         var emailLink = document.getElementById('emailLink');
         var domain = "nerdflat.com";
-        var user = 's\x7Flu'; // Example obfuscated email user
+        var user = 's\x7Flu'; // Obfuscated email user
+        
+        // Decode the email address
+        var decodedEmail = decode(user) + "@" + domain;
+
+        // Enable the button, set the href, and show the decoded email in parentheses
+        emailLink.href = "mailto:" + decodedEmail;
+        button.innerText = `Send Email to Administrator (${decodedEmail})`; // Show email in button
 
         // Start the fade-in effect
         fadeIn(button);
-        
-        // Enable the button and set the mailto link
         button.disabled = false;
-        button.classList.add('enabled'); // Add enabled class
-        emailLink.href = "mailto:" + decode(user) + "@" + domain;
-        
-        intervalId = setInterval(checkCaptchaStatus, 100);
+        button.classList.add('enabled'); // Add enabled class for cursor change
+
+        // Start checking the CAPTCHA status every second
+        intervalId = setInterval(checkCaptchaStatus, 1000);
     }
 
     // Function to check if the reCAPTCHA is valid
     function checkCaptchaStatus() {
-        // If the reCAPTCHA response is invalid
         if (grecaptcha.getResponse().length === 0) {
             hideButton();
         }
@@ -102,32 +100,30 @@
 
     // Function to fade in the button
     function fadeIn(element) {
-        var opacity = 0; // Initial opacity
-        element.style.display = 'inline-block'; // Ensure the element is displayed
-        element.style.opacity = opacity; // Apply the new opacity
+        var opacity = 0;
+        element.style.display = 'inline-block';
 
-        // Incrementally increase the opacity
         var interval = setInterval(function() {
             if (opacity < 1) {
-                opacity += 0.1; // Increase opacity by 0.1
-                element.style.opacity = opacity; // Apply the new opacity
+                opacity += 0.1;
+                element.style.opacity = opacity;
             } else {
-                clearInterval(interval); // Stop when fully visible
+                clearInterval(interval);
             }
-        }, 50); // Update every 50 milliseconds
+        }, 50);
     }
 
-    // Function to hide the button
+    // Function to hide the button if CAPTCHA expires
     function hideButton() {
         var button = document.getElementById('sendButton');
         var emailLink = document.getElementById('emailLink');
 
-        // Reset the button and hide it
-        button.style.display = 'none'; // Hide the button
+        // Reset and hide button
+        button.style.display = 'none';
         button.classList.remove('enabled'); // Remove enabled class
-        emailLink.href = "#"; // Reset href to "#"
+        emailLink.href = "#";
+        button.innerText = "Send Email to Administrator"; // Reset button text
 
-        // Clear the interval to stop checking
         clearInterval(intervalId);
     }
 </script>
