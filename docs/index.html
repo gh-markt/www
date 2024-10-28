@@ -84,8 +84,6 @@
 
         // Start the fade-in effect
         fadeIn(button);
-        button.disabled = false;
-        button.classList.add('enabled'); // Add enabled class for cursor change
 
         // Start checking the CAPTCHA status every second
         intervalId = setInterval(checkCaptchaStatus, 1000);
@@ -108,6 +106,8 @@
                 opacity += 0.1;
                 element.style.opacity = opacity;
             } else {
+                element.disabled = false;
+                element.classList.add('enabled'); // Add enabled class for cursor change
                 clearInterval(interval);
             }
         }, 50);
