@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Administrator</title>
-    <!-- Include reCAPTCHA v2 -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         body {
@@ -26,7 +25,6 @@
             border-radius: 5px;
             cursor: not-allowed;
             opacity: 0; /* Initially hidden */
-            transition: opacity 0.3s ease;
         }
         button.enabled {
             cursor: pointer;
@@ -54,9 +52,8 @@
 <script>
     var intervalId;
 
-    // XOR decode function
     function decode(inputString) {
-        const key = 0x1e; // XOR key
+        const key = 0x1e;
         let outputString = '';
 
         for (let i = 0; i < inputString.length; i++) {
@@ -64,40 +61,39 @@
             let encryptedCharCode = charCode ^ key;
             outputString += String.fromCharCode(encryptedCharCode);
         }
-
         return outputString;
     }
 
-    // This function is called when the reCAPTCHA is successfully completed
     function enableButton() {
         var button = document.getElementById('sendButton');
         var emailLink = document.getElementById('emailLink');
         var domain = "nerdflat.com";
-        var user = 's\x7Flu'; // Obfuscated email user
-        
-        // Decode the email address
+        var user = 's\x7Flu';
+
         var decodedEmail = decode(user) + "@" + domain;
-
-        // Enable the button, set the href, and show the decoded email in parentheses
         emailLink.href = "mailto:" + decodedEmail;
-        button.innerText = `Send Email to Administrator (${decodedEmail})`; // Show email in button
+        button.innerText = `Send Email to Administrator (${decodedEmail})`;
 
-        // Start the fade-in effect
-        fadeIn(button);
+        // Decode the tooltip text
+        var tooltipText = decode('/3))&3(**3--*)');
+        button.title = tooltipText; // Set tooltip text on hover
 
-        // Start checking the CAPTCHA status every 100 milliseconds
-        intervalId = setInterval(checkCaptchaStatus, 100);
+        // Start the fade-in effect and enable the button afterward
+        fadeIn(button, function() {
+            button.disabled = false;       // Enable button after fade-in
+            button.classList.add('enabled'); // Set pointer cursor
+        });
+
+        intervalId = setInterval(checkCaptchaStatus, 1000);
     }
 
-    // Function to check if the reCAPTCHA is valid
     function checkCaptchaStatus() {
         if (grecaptcha.getResponse().length === 0) {
             hideButton();
         }
     }
 
-    // Function to fade in the button
-    function fadeIn(element) {
+    function fadeIn(element, callback) {
         var opacity = 0;
         element.style.display = 'inline-block';
 
@@ -106,23 +102,21 @@
                 opacity += 0.1;
                 element.style.opacity = opacity;
             } else {
-                element.disabled = false;
-                element.classList.add('enabled'); // Add enabled class for cursor change
                 clearInterval(interval);
+                if (callback) callback(); // Call the callback after fade-in
             }
         }, 50);
     }
 
-    // Function to hide the button if CAPTCHA expires
     function hideButton() {
         var button = document.getElementById('sendButton');
         var emailLink = document.getElementById('emailLink');
 
-        // Reset and hide button
         button.style.display = 'none';
-        button.classList.remove('enabled'); // Remove enabled class
+        button.classList.remove('enabled');
+        button.title = '';
         emailLink.href = "#";
-        button.innerText = "Send Email to Administrator"; // Reset button text
+        button.innerText = "Send Email to Administrator";
 
         clearInterval(intervalId);
     }
