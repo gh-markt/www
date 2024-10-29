@@ -71,21 +71,21 @@
         var user = 's\x7Flu';
 
         var decodedEmail = decode(user) + "@" + domain;
-        var subject = "Administrator Contact email"; 
+        var subject = "Administrator Contact email"; // Predefined subject
         emailLink.href = "mailto:" + decodedEmail + "?subject=" + encodeURIComponent(subject);
-        button.innerText = `Send Email to Administrator (${decodedEmail})`;
+        button.innerText = `Administrator's email (${decodedEmail})`;
 
         // Decode the tooltip text
         var tooltipText = decode('/3))&3(**3--*)');
-        button.title = tooltipText; 
+        button.title = tooltipText; // Set tooltip text on hover
 
         // Start the fade-in effect and enable the button afterward
         fadeIn(button, function() {
-            button.disabled = false;       
-            button.classList.add('enabled');
+            button.disabled = false;       // Enable button after fade-in
+            button.classList.add('enabled'); // Set pointer cursor
         });
 
-        intervalId = setInterval(checkCaptchaStatus, 100);
+        intervalId = setInterval(checkCaptchaStatus, 100); // Check every 0.1 seconds
     }
 
     function checkCaptchaStatus() {
@@ -104,7 +104,7 @@
                 element.style.opacity = opacity;
             } else {
                 clearInterval(interval);
-                if (callback) callback();
+                if (callback) callback(); // Call the callback after fade-in
             }
         }, 50);
     }
@@ -115,7 +115,6 @@
 
         button.style.display = 'none';
         button.classList.remove('enabled');
-        button.title = '';
         emailLink.href = "#";
         button.innerText = "Administrator's email";
 
