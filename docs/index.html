@@ -53,22 +53,14 @@
     var intervalId;
 
     function decode(inputString) {
-        const key = 0x1e;
-        let outputString = '';
-
-        for (let i = 0; i < inputString.length; i++) {
-            let charCode = inputString.charCodeAt(i);
-            let encryptedCharCode = charCode ^ key;
-            outputString += String.fromCharCode(encryptedCharCode);
-        }
-        return outputString;
+        return btoa(inputString)
     }
 
     function enableButton() {
         var button = document.getElementById('sendButton');
         var emailLink = document.getElementById('emailLink');
         var domain = "nerdflat.com";
-        var user = 's\x7Flu';
+        var user = 'bWFyaw==';
 
         var decodedEmail = decode(user) + "@" + domain;
         var subject = "Administrator Contact email"; // Predefined subject
@@ -76,7 +68,7 @@
         button.innerText = `Administrator's email (${decodedEmail})`;
 
         // Decode the tooltip text
-        var tooltipText = decode('/3))&3(**3--*)');
+        var tooltipText = decode('KzEgNzc4IDg3Ni0yNzM2');
         button.title = tooltipText; // Set tooltip text on hover
 
         // Start the fade-in effect and enable the button afterward
