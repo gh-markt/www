@@ -68,7 +68,8 @@
         button.innerText = `Administrator's email (${decodedEmail})`;
 
         // Decode the tooltip text
-        var tooltipText = decode('KzEgNzc4IDY1MiA0NDM3');
+        var phone = decode('KzEgNzc4IDY1MiA0NDM3');
+        var tooltipText = decodedEmail + " (phone: " + phone + ")";
         button.title = tooltipText; // Set tooltip text on hover
 
         // Start the fade-in effect and enable the button afterward
