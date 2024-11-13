@@ -2,119 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Administrator</title>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 100px;
-        }
-        .captcha-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        button {
-            padding: 15px 30px;
-            font-size: 16px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: not-allowed;
-            opacity: 0; /* Initially hidden */
-        }
-        button.enabled {
-            cursor: pointer;
-        }
-        button:hover.enabled {
-            background-color: #218838;
-        }
-    </style>
+    <title>Contact Admin</title>
 </head>
 <body>
+    <h1>Contact the Admin</h1>
+    <p>Click the button below to contact the administrator regarding any issues.</p>
 
-<h2>Contact Administrator</h2>
-<p>Complete the reCAPTCHA below to reveal the administrator's email.</p>
+    <!-- Image button to send an email -->
+    <a href="mailto:mark@nerdflat.com?subject=Administor%20email%20contact">
+        <img src="admin-email.png" alt="Contact Admin" style="width:200px;height:auto;">
+    </a>
 
-<div class="captcha-container">
-    <div class="g-recaptcha" data-sitekey="6LeTYGsqAAAAAO1tPIt8Cst3xt0-iPpP2L57TWM4" data-callback="enableButton"></div>
-</div>
-
-<br/>
-
-<a id="emailLink" href="#">
-    <button id="sendButton" disabled>Administrator's email</button>
-</a>
-
-<script>
-    var intervalId;
-
-    function decode(inputString) {
-        return atob(inputString)
-    }
-
-    function enableButton() {
-        var button = document.getElementById('sendButton');
-        var emailLink = document.getElementById('emailLink');
-        var domain = "nerdflat.com";
-        var user = 'bWFyaw==';
-
-        var decodedEmail = decode(user) + "@" + domain;
-        var subject = "Administrator Contact email"; // Predefined subject
-        emailLink.href = "mailto:" + decodedEmail + "?subject=" + encodeURIComponent(subject);
-        button.innerText = `Administrator's email (${decodedEmail})`;
-
-        // Decode the tooltip text
-        var phone = decode('KzEgNzc4IDY1MiA0NDM3');
-        var tooltipText = decodedEmail + " (phone: " + phone + ")";
-        button.title = tooltipText; // Set tooltip text on hover
-
-        // Start the fade-in effect and enable the button afterward
-        fadeIn(button, function() {
-            button.disabled = false;       // Enable button after fade-in
-            button.classList.add('enabled'); // Set pointer cursor
-        });
-
-        intervalId = setInterval(checkCaptchaStatus, 100); // Check every 0.1 seconds
-    }
-
-    function checkCaptchaStatus() {
-        if (grecaptcha.getResponse().length === 0) {
-            hideButton();
-        }
-    }
-
-    function fadeIn(element, callback) {
-        var opacity = 0;
-        element.style.display = 'inline-block';
-
-        var interval = setInterval(function() {
-            if (opacity < 1) {
-                opacity += 0.1;
-                element.style.opacity = opacity;
-            } else {
-                clearInterval(interval);
-                if (callback) callback(); // Call the callback after fade-in
-            }
-        }, 50);
-    }
-
-    function hideButton() {
-        var button = document.getElementById('sendButton');
-        var emailLink = document.getElementById('emailLink');
-
-        button.style.display = 'none';
-        button.classList.remove('enabled');
-        emailLink.href = "#";
-        button.innerText = "Administrator's email";
-        button.style.opacity = 0;
-
-        clearInterval(intervalId);
-    }
-</script>
-
+    <!-- Link to perspective.html -->
+    <p>Want to know why the dating site might be problematic? <a href="perspective.html">Read more here</a>.</p>
 </body>
 </html>
