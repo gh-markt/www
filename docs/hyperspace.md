@@ -129,88 +129,77 @@ To enter hyperspace, the player must:
 
 ---
 
-### Q1: What must I declare when entering hyperspace?
-
-* The **piece and square** being removed
-* The **number of full future turns (N)** it will remain off the board
-
----
-
-### Q2: What is kept secret?
-
-Only the **destination square**, which is privately recorded and may not be changed (unless corrected immediately due to illegal scheduling).
+### Q1: How many pieces can a player have in hyperspace at once?
+There is no limit to how many of your pieces may be in hyperspace simultaneously.
+However, you may only phase one piece per turn, and only one of your own pieces may be scheduled to return on any given turn.
 
 ---
 
-### Q3: Can both players have a piece return on the same turn?
+### Q2: What exactly must I declare when phasing a piece into hyperspace?
+You must publicly declare:
 
-Yes. The one-return-per-turn rule applies **per player**, not globally.
+The type and square of the piece being phased
 
----
+The number of full future turns (N ≥ 1) before it returns
 
-### Q4: Can I schedule two of my own pieces to return on the same turn?
-
-No. That is illegal.
-
-* If caught **before the opponent moves**, you may **adjust the delay** or **cancel** the hyperspace action.
-* If **not caught in time**, **both pieces return** and the move stands.
+The destination square is recorded privately and immediately, and may not be changed.
 
 ---
 
-### Q5: Can I change the delay after declaring it?
+### Q3: What happens if two of my own pieces are scheduled to return on the same turn?
+That’s illegal.
+If caught before your opponent moves, you may either:
 
-Only to correct a scheduling conflict **before the opponent’s next move**.
-Once the opponent moves, the commitment is locked in.
+Cancel the phasing action, or
 
----
+Adjust the return turn
 
-### Q6: Can a returning piece give check or checkmate?
-
-Yes — the piece becomes **immediately active** at the end of the turn it returns.
-
----
-
-### Q7: Can I move and rematerialize on the same turn?
-
-Yes — the regular move occurs first; then the rematerializing piece returns.
+If not caught in time, both pieces return regardless — and any resulting conflicts are resolved per the rules.
 
 ---
 
-### Q8: Can I move the rematerializing piece that turn?
+### Q4: Can my reentering piece give check or contribute to checkmate?
+Yes. A piece that returns at the end of your turn becomes immediately active:
 
-No — it **may not move** until your next turn, but it may **threaten, check**, and **defend** immediately.
+It can threaten, defend, give check, and participate in tactics
 
----
-
-### Q9: What happens if the return square is occupied?
-
-* **By a friendly piece** → choose which to keep
-* **By an enemy piece** → returning piece is **lost**
-* **By an invalid square (e.g., bishop on wrong color)** → piece is **forfeited**
+It cannot move until your next turn
 
 ---
 
-### Q10: Can I use hyperspace to enable castling?
-
-Yes — phasing out a blocking piece is legal.
-But the rook itself **cannot be in hyperspace** and still castle.
+### Q5: Can I move and have a piece return on the same turn?
+Yes. A reentry does not replace your move — it happens after your normal action, at the end of your turn.
 
 ---
 
-### Q11: What are the risks of longer delays?
+### Q6: What happens if the reentry square is occupied?
+Occupied by enemy → Your piece is lost; no capture occurs.
 
-You’re temporarily **down material**, and your reentry square may become **occupied** or **tactically exposed** by the time it’s used.
+Occupied by friendly piece → You must choose one to keep; the other is removed.
 
----
-
-### Q12: Can a referee see the secret reentry squares?
-
-Yes — referees are responsible for tracking all private commitments.
-They must **never reveal** destination squares to either player.
+Invalid square (e.g., wrong color for a bishop) → Returning piece is forfeited.
 
 ---
 
-### Q13: Can I force a stalemate with hyperspace?
+### Q7: Can I use hyperspace to aid castling?
+Yes, indirectly:
 
-Yes — if your king is not in check and **all your other pieces are in hyperspace** with no legal move, it is a **valid stalemate**.
+You may phase out a piece blocking the castling path
 
+But a rook in hyperspace cannot be used for castling
+
+---
+
+### Q8: What happens if I have no legal move but still have phased pieces?
+If your king is not in check and you have no legal moves (including no immediate reentries), it is stalemate, even if pieces are scheduled to return in future turns.
+
+---
+
+### Q9: Is it legal to phase a piece that is under attack?
+Yes — hyperspace may be used to rescue an endangered piece, though doing so costs tempo and risks the reentry being blocked or lost.
+
+---
+### Q10: Can I bluff or fake my reentry square?
+
+No — the destination square is a binding, privately recorded commitment made at the time of phasing.
+In tournament play, a referee will enforce it.
