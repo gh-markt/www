@@ -199,7 +199,25 @@ If your king is not in check and you have no legal moves (including no immediate
 Yes — hyperspace may be used to rescue an endangered piece, though doing so costs tempo and risks the reentry being blocked or lost.
 
 ---
+
 ### Q10: Can I bluff or fake my reentry square?
 
 No — the destination square is a binding, privately recorded commitment made at the time of phasing.
 In tournament play, a referee will enforce it.
+
+--- 
+
+### Q11: What happens if I try to phase out a piece, but it's illegal due to a scheduling conflict? Can I pick a different piece to move instead?
+
+It depends on the specific rules agreed upon before the game begins — declaring a hyperspace action is treated like *touching the piece* under standard touch-move rules, and in that ruleset, you're now committed to moving or phasing that piece **if doing so is legal**.
+
+In such a situation, you **must**:
+
+- Make a standard move with that piece if one is available, **or**
+- Phase it out with a **different legal return turn** (i.e. one without a conflict), if no standard moves exist.
+
+You may only choose a different piece if **every possible action with the touched piece** (both normal moves and hyperspace) would:
+- Leave your king in check, or  
+- Put your king in check.
+
+If touch-move rules are **not enforced**, then the player is free to choose a different piece to move.
