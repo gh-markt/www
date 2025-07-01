@@ -1,5 +1,4 @@
-
-# Hyperspace Chess — Official Rules v2.3
+# Hyperspace Chess — Official Rules
 
 *A strategic variant of classical chess that introduces hyperspace mechanics — allowing certain pieces to phase out of play and rematerialize on a secretly chosen square. The game emphasizes timing, commitment, and psychological foresight while preserving fair, deterministic play.*
 
