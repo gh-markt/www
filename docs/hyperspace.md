@@ -77,7 +77,7 @@ To enter hyperspace, the player must:
   * **Cancel** the hyperspace action entirely (although this choice is still subject to touch move rules, if that is being employed), or
   * **Change the delay** to a legal future turn
 
-> If not caught in time, the scheduling stands and **both pieces return**, even if illegal under the rules.  
+> If not caught in time, the scheduling stands and **both pieces return on scheudle**, even if illegal under the rules.  
 
 ---
 
