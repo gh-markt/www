@@ -74,7 +74,7 @@ To enter hyperspace, the player must:
 * This is checked **at the time of hyperspace entry**.
 * If a scheduling conflict is discovered **before the opponent moves**, the player may:
 
-  * **Cancel** the hyperspace action entirely (although this choice is still subject to touch move rules, if that is being employed), or
+  * **Cancel** the hyperspace action entirely (subject to touch-move rules, if in effect), or
   * **Change the delay** to a legal future turn
 
 > If not caught in time, the scheduling stands and **both pieces return on scheudle**, even if illegal under the rules.  
