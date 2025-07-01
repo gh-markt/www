@@ -64,7 +64,7 @@ To enter hyperspace, the player must:
 * **Empty square** → the piece returns successfully.
 * **Occupied by a friendly piece** → player chooses which to keep; the other is removed.
 * **Occupied by an enemy piece** → the returning piece is **lost**; no capture occurs.
-* **Invalid square (e.g., bishop returning to wrong-colored square)** → the piece is **forfeited**.
+* **Invalid square (e.g., bishop returning to wrong-colored square)** → the piece is **forfeited**, if the opponent realizes the error before they touch a piece of their own.
 
 ---
 
